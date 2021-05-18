@@ -1,16 +1,10 @@
 #An EKS cluster requires a number of worker nodes to schedule Kubernetes Pods
-
+#EKS FARGATE LAUNCH TYPE 
 resource "aws_eks_node_group" "sales_order_system_aws_eks_node_group" {
     cluster_name    = "eks cluster"
     node_group_name = "eks worker node group"
     node_role_arn   = aws_iam_role.eks_worker_node_group_role.arn
     subnet_ids      = data.terraform_remote_state.app_network.outputs.subnet_ids
-
-    scaling_config {
-        desired_size    = 5
-        max_size        = 10
-        min_size        = 3
-    }
 }
 
 resource "aws_iam_role" "eks_worker_node_group_role" {
